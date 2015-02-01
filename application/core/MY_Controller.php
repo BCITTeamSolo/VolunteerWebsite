@@ -5,9 +5,7 @@
  *
  * Default application controller
  *
- * @author		JLP
- * @copyright           2010-2013, James L. Parry
- * ------------------------------------------------------------------------
+ * @author		Matthew Banman
  */
 class Application extends CI_Controller {
 

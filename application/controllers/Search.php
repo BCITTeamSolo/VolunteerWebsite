@@ -1,14 +1,13 @@
 <?php
 
 /**
- * Our homepage. Show a table of all the author pictures. Clicking on one should show their quote.
- * Our quotes model has been autoloaded, because we use it everywhere.
+ * This controller handles all search-related functionality.
  * 
- * controllers/Welcome.php
+ * controllers/Search.php
  *
  * ------------------------------------------------------------------------
  */
-class Welcome extends Application {
+class Search extends Application {
 
     function __construct() {
         parent::__construct();
@@ -18,33 +17,23 @@ class Welcome extends Application {
     //  The normal pages
     //-------------------------------------------------------------
 
-	// This function displays the homepage!
+	// This function displays the search page
     function index() {
-        $this->data['pagebody'] = 'homepage';    // this is the view we want shown
-        // build the list of authors, to pass on to our view
-        $source = $this->quotes->all();
-        $authors = array();
-        foreach ($source as $record) {
-            $authors[] = array('who' => $record['who'], 'mug' => $record['mug'], 'href' => $record['where']);
-        }
-        $this->data['authors'] = $authors;
-
+        $this->data['pagebody'] = 'search';    // this is the view we want shown
+		
         $this->render();
     }
 	
-	// This function displays the Elayne Boosler quote
-	function shucks()
+	// this function will find an appropriate list of items from the search terms provided
+	function find( $searchString )
 	{
-		$this->data['pagebody'] = 'justone';    // this is the view we want shown
-        
-		// get the second record!
-		$record = $this->quotes->get(2);
-		$this->data = array_merge($this->data, $record);
+		$this->data['pagebody'] = 'searchResult';    // this is the view we want shown
+		$this->data['searchString'] = $searchString;
 		
         $this->render();
 	}
 
 }
 
-/* End of file Welcome.php */
-/* Location: application/controllers/Welcome.php */
+/* End of file Search.php */
+/* Location: application/controllers/Search.php */

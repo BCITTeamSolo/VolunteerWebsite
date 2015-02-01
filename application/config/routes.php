@@ -43,12 +43,10 @@ $route['404_override'] = '';
 
 // my own routes!
 
-$route['sleep'] = "first/zzz";
-$route['lock/(:any)/(:any)'] = "welcome/shucks";
-$route['show/(:num)'] = "first/gimme/3";
-$route['dunno'] = "guess";
-$route['([A-z]{4})/bingo'] = "bingo";
-$route['comp(\d+)/(:any)'] = "bingo/wisdom";
+$route['user/(:num)'] = "userprofile/showprofile/$1";
+$route['organization/(:num)'] = "organizationprofile/showprofile/$1";
+$route['about'] = "about";
+$route['search'] = "search";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

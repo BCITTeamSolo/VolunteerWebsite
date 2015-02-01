@@ -21,10 +21,14 @@ if (!defined('APPPATH'))
         <link rel="stylesheet" type="text/css" href="/assets/materialize/css/style.css"/>
     </head>
     <body>
-        <nav class="light-green darken-2" role="navigation">
-			{menubar}
-		</nav>
+		<div class="navbar-fixed">
+			<nav class="light-green darken-2" role="navigation">
+				{menubar}
+			</nav>
+		</div>
+		
 		{content}
+		
 		<footer class="page-footer light-green darken-4">
 			{footer}
 		</footer>

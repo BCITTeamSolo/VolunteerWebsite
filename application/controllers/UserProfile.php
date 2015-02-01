@@ -1,14 +1,16 @@
 <?php
 
 /**
- * Our homepage. Show a table of all the author pictures. Clicking on one should show their quote.
- * Our quotes model has been autoloaded, because we use it everywhere.
- * 
- * controllers/Welcome.php
+ * This is the UserProfile controller - it contains all funtions required
+ * gather data for and display a user's profile. 
+ *
+ * controllers/UserProfile.php
+ *
+ * @author Matthew Banman
  *
  * ------------------------------------------------------------------------
  */
-class Welcome extends Application {
+class UserProfile extends Application {
 
     function __construct() {
         parent::__construct();
@@ -18,33 +20,31 @@ class Welcome extends Application {
     //  The normal pages
     //-------------------------------------------------------------
 
-	// This function displays the homepage!
+	// Non-functioning index method
     function index() {
-        $this->data['pagebody'] = 'homepage';    // this is the view we want shown
-        // build the list of authors, to pass on to our view
-        $source = $this->quotes->all();
-        $authors = array();
-        foreach ($source as $record) {
-            $authors[] = array('who' => $record['who'], 'mug' => $record['mug'], 'href' => $record['where']);
-        }
-        $this->data['authors'] = $authors;
-
-        $this->render();
+        
     }
 	
-	// This function displays the Elayne Boosler quote
-	function shucks()
+	// This function displays the user profile!
+	function showProfile( $userNumber )
 	{
-		$this->data['pagebody'] = 'justone';    // this is the view we want shown
+		$this->data['pagebody'] = 'userProfile'; // show the userProfile page
         
-		// get the second record!
-		$record = $this->quotes->get(2);
-		$this->data = array_merge($this->data, $record);
+		// find user with supplied user number
+        $user = $this->user->getSingle( $userNumber );
 		
+		if( $user == null )
+		{
+			$this->data['pagebody'] = 'userNotFound'; // swap to not found page
+		}
+		else
+		{
+			$this->data = array_merge($this->data, $user);
+		}
+
         $this->render();
 	}
-
 }
 
-/* End of file Welcome.php */
-/* Location: application/controllers/Welcome.php */
+/* End of file UserProfile.php */
+/* Location: application/controllers/UserProfile.php */

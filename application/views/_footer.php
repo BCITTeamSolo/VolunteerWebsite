@@ -14,7 +14,7 @@
         </div>
 		<div class="col l1 s12"><span class="light-green-text text-darken-4">a</span></div>
         <div class="col l2 s12">
-          <h5 class="white-text">Connect</h5>
+          <h5 class="white-text">Site Map</h5>
           <ul>
 			{menudata}
             <li><a class="white-text" href="#!">{name}</a></li>
