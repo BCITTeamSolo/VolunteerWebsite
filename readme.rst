@@ -24,13 +24,11 @@ Features
 
 This project is intended to be a prototype for a web app I plan to build in the near future. Basic features will be implemented, including:
 
-<ul>
-<li>user and organization account creation</li>
-<li>profile customization</li>
-<li>search functionality</li>
-<li>canned causes or alignments for organizations and users</li>
-<li>algorithm to determine how compatible users and organizations are</li>
-</ul>
+- user and organization account creation
+- profile customization
+- search functionality
+- canned causes or alignments for organizations and users
+- algorithm to determine how compatible users and organizations are
 
 **************
 Current State
