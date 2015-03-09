@@ -66,19 +66,30 @@ class Register extends Application {
 				$newIndividual->last_name 	= $this->input->post('last_name');
 				$newIndividual->about_me 	= $this->input->post('about_me');
 				
-				// causes
-				/*
-				$newIndividual->causes 		= array(
-					"animals"		=> $this->input->post('cause_animals'),
-					"environment"	=> $this->input->post('cause_environment'),
-					"welfare"		=> $this->input->post('cause_welfare'),
-					"disabilities"	=> $this->input->post('cause_disabilities')
-				);
-				*/
-				
 				// add new user to db
 				$this->user->add( $newUser );
 				$this->individual->add( $newIndividual);
+				
+				// add causes for this user
+				if( $this->input->post('cause_animals') )
+				{
+					$this->addCause( $user_id, 1 );
+				}
+				
+				if( $this->input->post('cause_environment') )
+				{
+					$this->addCause( $user_id, 2 );
+				}
+				
+				if( $this->input->post('cause_welfare') )
+				{
+					$this->addCause( $user_id, 3 );
+				}
+				
+				if( $this->input->post('cause_disabilities') )
+				{
+					$this->addCause( $user_id, 4 );
+				}
 			
 				// prepare to render success pages
 				$this->data['user_id']				= $user_id;
@@ -107,6 +118,16 @@ class Register extends Application {
 			$this->data['pagebody'] = 'registerIndividual';    // this is the view we want shown
 			$this->render();
 		}
+	}
+	
+	// add new cause for registering user
+	function addCause( $user_id, $cause_id )
+	{
+		$userCause 				= $this->usercause->create();
+		$userCause->userid 		= $user_id;
+		$userCause->causeid 	= $cause_id;
+		
+		$this->usercause->add( $userCause );
 	}
 	
 	// validates incoming post data for a registering individual

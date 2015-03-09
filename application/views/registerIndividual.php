@@ -52,19 +52,19 @@
 				<h4 class="col s12">My Causes:</h4><br>
 				<h5 class="col s12">Your choices help match you up with potential volunteer opportunities!</h5><br>
 				<div class="input-field col s6 m3">
-					<input type="checkbox" id="cause_animals" />
+					<input type="checkbox" id="cause_animals" name="cause_animals" />
 					<label for="cause_animals">Animals</label>
 				</div>
 				<div class="input-field col s6 m3">
-					<input type="checkbox" id="cause_environment" />
+					<input type="checkbox" id="cause_environment" name="cause_environment" />
 					<label for="cause_environment">The Environment</label>
 				</div>
 				<div class="input-field col s6 m3">
-					<input type="checkbox" id="cause_welfare" />
+					<input type="checkbox" id="cause_welfare" name="cause_welfare" />
 					<label for="cause_welfare">Social Welfare</label>
 				</div>
 				<div class="input-field col s6 m3">
-					<input type="checkbox" id="cause_disabilities" />
+					<input type="checkbox" id="cause_disabilities" name="cause_disabilities" />
 					<label for="cause_disabilities">Disabilities</label>
 				</div>
 			</div>
