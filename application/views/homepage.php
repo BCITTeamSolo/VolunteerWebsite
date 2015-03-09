@@ -6,7 +6,7 @@
         <h5 class="header col s12 light">Matchmaking for volunteers and organizations. Find your perfect fit.</h5>
       </div>
       <div class="row center">
-        <a href="signup.html" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Get Started</a>
+        <a href="register/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Get Started</a>
       </div>
       <br><br>
 
