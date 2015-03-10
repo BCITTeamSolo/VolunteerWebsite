@@ -8,25 +8,9 @@
 			<div class="row">
 				<div class="input-field col s0 m2 white-text"></div>
 				<div class="input-field col s12 m4">
-					<p>
-						<div>
-							<h4>Personal Info</h4>
-							<p>user_id: {user_id}</p>
-							<p>first name: {first_name}</p>
-							<p>last name: {last_name}</p>
-							<p>email: {email}</p>
-							<p>password: {password}</p>
-							<p>profile pic: {profile_picture}</p>
-							<p>about me: {about_me}</p>
-						</div>
-						<div>
-							<h4>Causes</h4>
-							<p>animals: {cause_animals}</p>
-							<p>environment: {cause_environment}</p>
-							<p>welfare: {cause_welfare}</p>
-							<p>disabilities: {cause_disabilities}</p>
-						</div>
-					</p>
+					<p>Welcome to Volunteer Website! Take a look around and find your perfect match!</p>
+					<br>
+					<p>Why not try <a href="/search">searching</a> our existing users and organizations!</p>
 				</div>
 				<div class="input-field col s0 m2 white-text"></div>
 			</div>

@@ -69,7 +69,7 @@ class Login extends Application {
 	function checkPassword( $email, $hashedPass )
 	{
 		$passwordQuery = $this->db
-			->select('password')
+			->select('userid, password')
 			->from('user')
 			->where("email = '$email'")
 			->get();
@@ -81,6 +81,9 @@ class Login extends Application {
 			
 			if( $hashedPass == $password )
 			{
+				// set userid in session data
+				$this->session->set_userdata("user_id", $result[0]->userid);
+				
 				return true;
 			}
 			
@@ -93,6 +96,7 @@ class Login extends Application {
 	{
 		$this->session->unset_userdata("logged_in");
 		$this->session->unset_userdata("user_email");
+		$this->session->unset_userdata("user_id");
 		
 		//$this->data['pagebody'] = 'homepage';    // this is the view we want shown
 		
