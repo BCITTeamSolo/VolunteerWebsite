@@ -33,6 +33,7 @@ class UserProfile extends Application {
 		// find user with supplied user number
 		$userId	= $this->user->getUserId( $indId );
 		
+		// check if user exists and display it!
 		if( is_null( $userId ) )
 		{
 			$this->data['pagebody'] = 'userNotFound'; // swap to not found page
@@ -47,6 +48,18 @@ class UserProfile extends Application {
 				$causes[0] = array(
 					"cause" => "This user has not selected any causes!"
 				);
+			}
+			
+			// check if current viewer is logged in or not
+			if($this->session->has_userdata("logged_in"))
+			{
+				// if the viewer is logged in...
+				
+				// do some work to calculate match percentage
+			}
+			else
+			{
+				$this->data["matchPercent"] = "? ";
 			}
 			
 			$this->data = array_merge($this->data, $user);

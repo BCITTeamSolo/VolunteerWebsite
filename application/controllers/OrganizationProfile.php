@@ -51,6 +51,18 @@ class OrganizationProfile extends Application {
 				);
 			}
 			
+			// check if current viewer is logged in or not
+			if($this->session->has_userdata("logged_in"))
+			{
+				// if the viewer is logged in...
+				
+				// do some work to calculate match percentage
+			}
+			else
+			{
+				$this->data["matchPercent"] = "? ";
+			}
+			
 			$this->data = array_merge($this->data, $organization);
 			$this->data["causes"] = $causes;
 		}

@@ -27,6 +27,10 @@
 |
 */
 
+// autoload drivers
+
+$autoload['drivers'] = array('session');
+
 /*
 | -------------------------------------------------------------------
 |  Auto-load Packges
@@ -52,7 +56,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('parser', 'smarty', 'database');
+$autoload['libraries'] = array('parser', 'smarty', 'database', 'encrypt');
 
 
 /*
