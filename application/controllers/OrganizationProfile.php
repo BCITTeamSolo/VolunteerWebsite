@@ -32,15 +32,27 @@ class OrganizationProfile extends Application {
 		$this->data['pagebody'] = 'organizationProfile'; // show the organizationProfile page
         
 		// find organization with supplied organization number
-        $organization = $this->organization->getSingle( $orgNumber );
+		$userId 		= $this->organization->getUserId( $orgNumber );
+        
 		
-		if( $organization == null )
+		if( is_null( $userId ) )
 		{
 			$this->data['pagebody'] = 'organizationNotFound'; // swap to not found page
 		}
 		else
 		{
+			$organization 	= $this->organization->getSingle( $orgNumber );
+			$causes 		= $this->usercause->getAllForUser( $userId );
+			
+			if( is_null( $causes ) || empty($causes) )
+			{
+				$causes[] = array(
+					"cause" => "This organization has not selected any causes!"
+				);
+			}
+			
 			$this->data = array_merge($this->data, $organization);
+			$this->data["causes"] = $causes;
 		}
 
         $this->render();

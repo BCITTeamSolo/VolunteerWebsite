@@ -7,17 +7,6 @@
  */
 class User extends MY_Model {
 
-	var $data = array(/*
-        array('id' => '1', 'firstName' => 'Jim', 'lastName' => 'Kirk', 'matchPercent'=>'80',
-            'about' => 'I am an explorer - I love meeting new people and cataloguing creatures of all kinds. I\'m excited to help in any way I can!'),
-		array('id' => '2', 'firstName' => 'Han', 'lastName' => 'Solo', 'matchPercent'=>'15',
-            'about' => 'I\'m passionate about helping the every-man, especially those in the transportation and cargo business.'),
-		array('id' => '3', 'firstName' => 'Captain', 'lastName' => 'Planet', 'matchPercent'=>'100',
-            'about' => 'Environmental issues are my bag - sign me up!'),
-		array('id' => '4', 'firstName' => 'Selena', 'lastName' => 'Kyle', 'matchPercent'=>'55',
-            'about' => 'I am an animal lover (especially cats)! I\'m looking for a position at an animal shelter or something similar.')
-    */);
-
     // Constructor
     public function __construct() 
 	{
@@ -28,9 +17,25 @@ class User extends MY_Model {
     public function getSingle($userId) 
 	{
         // iterate over the data until we find the one we want
-        foreach ($this->data as $record)
-            if ($record['id'] == $userId)
-                return $record;
+		$singleUser = $this->db
+			->select('i.first_name, i.last_name, i.about_me, i.profile_pic')
+			->from('individual as i')
+			->where('i.indid = ' . $userId)
+			->get();
+			
+		if( count( $singleUser->result() ) > 0)
+		{
+			$result = $singleUser->result();
+			$user = array(
+				"firstName" 	=> $result[0]->first_name,
+				"lastName"		=> $result[0]->last_name,
+				"about"			=> $result[0]->about_me,
+				"pic"			=> $result[0]->profile_pic
+			);
+			
+			return $user;
+		}
+		
         return null;
     }
 
@@ -64,6 +69,25 @@ class User extends MY_Model {
 		return $items;
 		*/
     }
+	
+	public function getUserId( $indId )
+	{
+		$singleUser = $this->db
+			->select('i.userid')
+			->from('individual as i')
+			->where('i.indid = ' . $indId)
+			->get();
+			
+		if( count( $singleUser->result() ) > 0 )
+		{
+			$result = $singleUser->result();
+			$userId = $result[0]->userid;
+			
+			return $userId;
+		}
+		
+		return null;
+	}
 	
 	public function validate( $user )
 	{

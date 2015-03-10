@@ -31,6 +31,18 @@
 			</div>
 			<div class="input-field col s0 m2 white-text"></div>
 		</div>
+		<div class="row center">
+			<div class="input-field col s0 m2 white-text"></div>
+			<div class="col s4 m2">
+				<span class="row black-text flow-text">Causes:</span>
+			</div>
+			<div class="col s8 m6">
+				{causes}
+					<span class="row black-text flow-text">{cause}</span><br>
+				{/causes}
+			</div>
+			<div class="input-field col s0 m2 white-text"></div>
+		</div>
     </div>  
     <br><br>
 

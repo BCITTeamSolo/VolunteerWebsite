@@ -48,16 +48,14 @@ class Register extends Application {
 				// create new user and individual, assign numbers
 				$user_id			= $this->user->highest() + 1;
 				$newUser 			= $this->user->create();
-				
 				$ind_id				= $this->individual->highest() + 1;
 				$newIndividual 		= $this->individual->create();
 				
 				// user info
 				$newUser->userid		= $user_id;
+				$newUser->typeid			= 1; // user type 1 is an individual
 				$newUser->email			= $this->input->post('email');
 				$newUser->password 		= md5( $this->input->post('password') );
-				$newUser->profilepic	= $this->input->post('profile_picture');
-				$newUser->type			= 1; // user type 1 is an individual
 				
 				// individual info
 				$newIndividual->indid		= $ind_id;
@@ -65,6 +63,7 @@ class Register extends Application {
 				$newIndividual->first_name 	= $this->input->post('first_name');
 				$newIndividual->last_name 	= $this->input->post('last_name');
 				$newIndividual->about_me 	= $this->input->post('about_me');
+				$newIndividual->profile_pic	= $this->input->post('profile_picture');
 				
 				// add new user to db
 				$this->user->add( $newUser );
@@ -91,7 +90,7 @@ class Register extends Application {
 					$this->addCause( $user_id, 4 );
 				}
 			
-				// prepare to render success pages
+				// prepare to render success page with given info
 				$this->data['user_id']				= $user_id;
 				$this->data['email']				= $this->input->post('email');
 				$this->data['password']				= $this->input->post('password');
@@ -103,7 +102,12 @@ class Register extends Application {
 				$this->data['cause_environment'] 	= $this->input->post('cause_environment');
 				$this->data['cause_welfare'] 		= $this->input->post('cause_welfare');
 				$this->data['cause_disabilities'] 	= $this->input->post('cause_disabilities');
-				$this->data['pagebody'] 			= 'registerIndividualSuccess';    // this is the view we want shown
+				
+				// log user in!
+				// not currently functional
+				
+				// show success page
+				$this->data['pagebody'] 			= 'registerIndividualSuccess';
 			}
 			else
 			{
@@ -140,6 +144,7 @@ class Register extends Application {
 		
 		}
 		
+		// currently always returns true
 		return true;
 	}
 	

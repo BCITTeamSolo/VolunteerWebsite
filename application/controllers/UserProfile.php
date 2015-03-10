@@ -26,20 +26,31 @@ class UserProfile extends Application {
     }
 	
 	// This function displays the user profile!
-	function showProfile( $userNumber )
+	function showProfile( $indId )
 	{
 		$this->data['pagebody'] = 'userProfile'; // show the userProfile page
         
 		// find user with supplied user number
-        $user = $this->user->getSingle( $userNumber );
+		$userId	= $this->user->getUserId( $indId );
 		
-		if( $user == null )
+		if( is_null( $userId ) )
 		{
 			$this->data['pagebody'] = 'userNotFound'; // swap to not found page
 		}
 		else
 		{
+			$user 	= $this->user->getSingle( $indId );
+			$causes = $this->usercause->getAllForUser( $userId );
+			
+			if( is_null( $causes ) )
+			{
+				$causes[0] = array(
+					"cause" => "This user has not selected any causes!"
+				);
+			}
+			
 			$this->data = array_merge($this->data, $user);
+			$this->data["causes"] = $causes;
 		}
 
         $this->render();
