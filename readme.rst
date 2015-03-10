@@ -31,7 +31,17 @@ This project is intended to be a prototype for a web app I plan to build in the 
 - algorithm to determine how compatible users and organizations are
 
 **************
-Current State
+Current State - Assignment 2 (Tagged 2.0)
+**************
+
+The webapp uses a database connection to register and log in users. It is also used to gather a user's data when viewing their page. Please run dbscript.sql at the root of this project to create the database with dummy initial data.
+
+Registration and login function correctly, however profile image upload for registration is currently not functioning. I haven't been able to change the menu bar to reflect the user's current state yet - please visit a user or organization page to see this in action - a logged-in user will see a match percentage, while a guest will see a prompt to log in or register.
+
+There is no profile customization functioning after registration at the moment. This will be implemented in a future patch.
+
+**************
+Old State - Assignment 1 (Tagged 1.0)
 **************
 
 Currently, I have hard-coded user and organization data into the User and Organization models. However, the links in the nav bar only display one each.

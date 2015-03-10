@@ -5,12 +5,13 @@ if (!defined('BASEPATH'))
 
 // the menu basics (text navbar)
 $config['menu_choices'] = array(
-    'menudata' => array(
-        array('name' => 'User', 'link' => '/user/1'),
-        array('name' => 'Organization', 'link' => '/organization/5'),
-        array('name' => 'Search', 'link' => '/search'),
-        )
-    );
+	'menudata' => array(
+		array('name' => 'Search', 'link' => '/search'),		
+		array('name' => 'Register', 'link' => '/register'),
+		array('name' => 'Log In', 'link' => '/login'),
+		array('name' => 'Log Out', 'link' => '/logout')
+		)
+);
 
 
 /*
@@ -237,7 +238,7 @@ $config['cache_path'] = '';
   | MUST set an encryption key.  See the user guide for info.
   |
  */
-$config['encryption_key'] = '';
+$config['encryption_key'] = "qEpWJUT8M3C3d1R8g43fQ1T0pr00v9UU";
 
 /*
   |--------------------------------------------------------------------------

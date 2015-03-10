@@ -7,33 +7,59 @@
  */
 class Organization extends CI_Model {
 
-    var $data = array(
-        array('id' => '5', 'organizationName' => 'Rebel Alliance', 'cause' => 'Overthrowing the Empire - power to the people!', 'matchPercent'=>'10',
-            'about' => 'We are a rag-tag group of individuals looking for revolution. Join us and stand up to the Man!'),
-		array('id' => '6', 'organizationName' => 'Internetters Anonymous', 'cause' => 'Internet access for all.', 'matchPercent'=>'95',
-            'about' => 'Without the Internet, you wouldn\'t be able to visit this website. How\'s THAT for a reason?'),
-		array('id' => '7', 'organizationName' => 'ANIMALS', 'cause' => 'Animals are the best!', 'matchPercent'=>'39',
-            'about' => 'ANIMALSSSSSSSSSS!!!!!'),
-		array('id' => '8', 'organizationName' => '', 'cause' => 'bob-monkhouse-150x150.jpg', 'matchPercent'=>'70',
-            'about' => ''),
-    );
-
     // Constructor
     public function __construct() {
         parent::__construct();
     }
 
     // retrieve a single organization
-    public function getSingle($which) {
+    public function getSingle($orgId) {
         // iterate over the data until we find the one we want
-        foreach ($this->data as $record)
-            if ($record['id'] == $which)
-                return $record;
+        $singleOrg = $this->db
+			->select('o.name, o.mission_statement, o.about_us, o.contact_email, o.contact_phone, o.logo_pic')
+			->from('organization as o')
+			->where('o.orgid = ' . $orgId)
+			->get();
+			
+		if( count( $singleOrg->result() ) > 0)
+		{
+			$result = $singleOrg->result();
+			$org = array(
+				"orgName" 		=> $result[0]->name,
+				"mission"		=> $result[0]->mission_statement,
+				"about"			=> $result[0]->about_us,
+				"contact_email"	=> $result[0]->contact_email,
+				"contact_phone" => $result[0]->contact_phone,
+				"pic"			=> $result[0]->logo_pic
+			);
+			
+			return $org;
+		}
+		
         return null;
     }
+	
+	public function getUserId( $orgId )
+	{
+		$singleUser = $this->db
+			->select('o.userid')
+			->from('organization as o')
+			->where('o.orgid = ' . $orgId)
+			->get();
+			
+		if( count( $singleUser->result() ) > 0 )
+		{
+			$result = $singleUser->result();
+			$userId = $result[0]->userid;
+			
+			return $userId;
+		}
+		
+		return null;
+	}
 
     // retrieve all organizations
     public function all() {
-        return $this->data;
+        //return $this->data;
     }
 }

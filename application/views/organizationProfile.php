@@ -1,12 +1,12 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h1 class="header center amber-text text-darken-2">{organizationName}</h1>
+      <h1 class="header center amber-text text-darken-2">{orgName}</h1>
       <div class="row center">
 		<div class="input-field col s0 m2 white-text"></div>
 		<div class="col s12 m8">
 			<div class="card-panel row center light-blue valign-wrapper">
-				<p class="white-text col s8 flow-text">Your compatability rating with {organizationName} is...
+				<p class="white-text col s8 flow-text">Your compatability rating with {orgName} is...
 				</p>
 				<div class="card-panel col s4 red white-text flow-text valign">{matchPercent}%
 				</div>
@@ -26,7 +26,7 @@
 				<span class="row black-text flow-text">Our Mission:</span>
 			</div>
 			<div class="col s8 m6">
-				<span class="row black-text flow-text">{cause}</span>
+				<span class="row black-text flow-text">{mission}</span>
 			</div>
 			<div class="input-field col s0 m2 white-text"></div>
 		</div>
@@ -37,6 +37,18 @@
 			</div>
 			<div class="col s8 m6">
 				<span class="row black-text flow-text">{about}</span>
+			</div>
+			<div class="input-field col s0 m2 white-text"></div>
+		</div>
+		<div class="row center">
+			<div class="input-field col s0 m2 white-text"></div>
+			<div class="col s4 m2">
+				<span class="row black-text flow-text">Causes:</span>
+			</div>
+			<div class="col s8 m6">
+				{causes}
+					<span class="row black-text flow-text">{cause}</span><br>
+				{/causes}
 			</div>
 			<div class="input-field col s0 m2 white-text"></div>
 		</div>
