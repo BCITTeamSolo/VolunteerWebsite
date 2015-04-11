@@ -10,7 +10,7 @@ class User extends MY_Model {
     // Constructor
     public function __construct() 
 	{
-        parent::__construct(null, 'userid');
+        parent::__construct('user', 'userid');
     }
 
     // retrieve a single user
@@ -39,35 +39,82 @@ class User extends MY_Model {
         return null;
     }
 
-    // retrieve all users
-    public function all() 
+    // retrieve all users including individuals and organizations
+    public function getAll() 
 	{
-        /*
-		$allUsers = $this->db
-			->select('u.code, u.name, u.price, oi.quantity')
-			->from('orderitems as oi')
-			->join('menu as m', 'oi.item = m.code', 'left outer')
-			->where('oi.order = ' . $num)
-			->get();
-			
-		$items = array();
-			
-		if( $orderItems->result() > 0 )
+		$allUsers = $this->all();
+		$users = Array();
+		
+		foreach( $allUsers as $user )
 		{
-			foreach( $orderItems->result() as $item )
+			$userid = $user->userid;
+			$typeid = $user->typeid;
+			$causes = null;
+			
+			$u['userid'] = $userid;
+			$u['type'] = $typeid;
+			
+			// if user is an individual, put together name
+			if($typeid == 1)
 			{
-				$items[] = array(
-					"code" => $item->code,
-					"name" => $item->name,
-					"quantity" => $item->quantity,
-					"price" => sprintf("$%0.2f", $item->price),
-					"subtotal" => sprintf("$%0.2f", $item->quantity * $item->price)
-				);
+				$individual = $this->db
+					->select('i.indid, i.first_name, i.last_name')
+					->from('individual as i')
+					->where('i.userid = ' . $userid)
+					->get();
+					
+				if( count( $individual->result() ) > 0)
+				{
+					$result = $individual->result();
+					$u['typeid'] = $result[0]->indid;
+					$u['name'] = $result[0]->first_name . " " . $result[0]->last_name;
+				}
 			}
+			// else if user is an org, grab name from db
+			else if($typeid = 2)
+			{
+				$organization = $this->db
+					->select('o.orgid, o.name')
+					->from('organization as o')
+					->where('o.userid = ' . $userid)
+					->get();
+					
+				if( count( $organization->result() ) > 0)
+				{
+					$causes = Array();
+					
+					$result = $organization->result();
+					$u['typeid'] = $result[0]->orgid;
+					$u['name'] = $result[0]->name;
+				}
+			}
+			
+			// add causes to the user
+			$causes = $this->db
+				->select('uc.causeid, c.name')
+				->from('user_cause as uc')
+				->join('cause as c', 'c.causeid = uc.causeid')
+				->where('uc.userid = ' . $userid)
+				->get();
+				
+			if( count( $causes->result() ) > 0)
+			{
+				$c = Array();
+				
+				$result = $causes->result();
+				foreach($result as $r)
+				{
+					$causeid = $r->causeid;
+					$c["$causeid"] = $r->name;
+				}
+			}
+			
+			$u['causes'] = $c;
+			
+			$users[] = $u;
 		}
 		
-		return $items;
-		*/
+		return $users;
     }
 	
 	public function getUserId( $indId )

@@ -12,6 +12,8 @@ class Register extends Application {
     function __construct() 
 	{
         parent::__construct();
+		//$this->load->library('upload');
+		//$this->load->helper('string');
     }
 
     //-------------------------------------------------------------
@@ -57,13 +59,57 @@ class Register extends Application {
 				$newUser->email			= $this->input->post('email');
 				$newUser->password 		= md5( $this->input->post('password') );
 				
+				// get profile image
+				//if( !empty($_FILES['profile_picture']) )
+				//{
+					//$this->addProfileImage();
+				//}
+				
+				// profile image things - currently non-functional
+				/*
+				$error = null;
+				
+				$pic_fileext = pathinfo($this->input->post('profile_picture'), PATHINFO_EXTENSION);
+		
+				$pic_filename = random_string('unique');
+				$config['upload_path'] = './assets/images/profilepics/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']	= '5000000';
+				$config['max_width']  = '500';
+				$config['max_height']  = '500';
+				$config['file_name'] = $pic_filename . $pic_fileext;
+				
+				// initialize and try the upload!
+				$this->upload->initialize($config);
+				$upload_success = $this->upload->do_upload("profile_picture");
+				
+				if ( !$upload_success )
+				{
+					$error = array('error' => $this->upload->display_errors());
+					var_dump($error);
+					var_dump($this->upload->data());
+					exit();
+				}
+				*/
+				
 				// individual info
 				$newIndividual->indid		= $ind_id;
 				$newIndividual->userid		= $user_id;
 				$newIndividual->first_name 	= $this->input->post('first_name');
 				$newIndividual->last_name 	= $this->input->post('last_name');
 				$newIndividual->about_me 	= $this->input->post('about_me');
-				$newIndividual->profile_pic	= $this->input->post('profile_picture');
+				$newIndividual->profile_pic = "";
+				
+				/*
+				if( $upload_success )
+				{
+					$newIndividual->profile_pic	= $pic_filename . $pic_fileext;
+				}
+				else
+				{
+					$newIndividual->profile_pic = "default";
+				}
+				*/
 				
 				// add new user to db
 				$this->user->add( $newUser );
@@ -89,24 +135,9 @@ class Register extends Application {
 				{
 					$this->addCause( $user_id, 4 );
 				}
-			
-				// prepare to render success page with given info
-				$this->data['user_id']				= $user_id;
-				$this->data['email']				= $this->input->post('email');
-				$this->data['password']				= $this->input->post('password');
-				$this->data['profile_pic']			= $this->input->post('profile_picture');
-				$this->data['first_name'] 			= $this->input->post('first_name');
-				$this->data['last_name'] 			= $this->input->post('last_name');
-				$this->data['about_me']				= $this->input->post('about_me');
-				$this->data['cause_animals'] 		= $this->input->post('cause_animals');
-				$this->data['cause_environment'] 	= $this->input->post('cause_environment');
-				$this->data['cause_welfare'] 		= $this->input->post('cause_welfare');
-				$this->data['cause_disabilities'] 	= $this->input->post('cause_disabilities');
-				
-				// log user in!
-				// not currently functional
 				
 				// show success page
+				//$this->data['typeid']				= $ind_id;
 				$this->data['pagebody'] 			= 'registerIndividualSuccess';
 			}
 			else
@@ -122,6 +153,14 @@ class Register extends Application {
 			$this->data['pagebody'] = 'registerIndividual';    // this is the view we want shown
 			$this->render();
 		}
+	}
+	
+	// adds a profile image for the current user
+	function addProfileImage()
+	{
+		
+
+		return $error;
 	}
 	
 	// add new cause for registering user

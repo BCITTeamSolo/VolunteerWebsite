@@ -3,7 +3,7 @@
       <br><br>
       <h1 class="header center amber-text text-darken-2">Search Volunteer Website</h1>
       <div class="row center">
-        <h5 class="header col s12 light">Looking for people, groups or organizations? Search below!</h5>
+        <h5 class="header col s12 light">Looking for people or organizations? Browse users below!</h5>
       </div>
       <br><br>
 
@@ -11,25 +11,24 @@
   </div>
 <div class="container">
 	<div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-		<form class="col s12">
-			<div class="input-field col s2 white-text">a</div>
-			<div class="input-field col s6 valign-wrapper">
-					<input id="search" type="text" class="validate">
-					<label for="search">Search:</label>
+		{users}
+		<br>
+			<div class="row">
+				<div class="input-field col s0 m2 white-text"></div>
+				<div class="col s12 m8">
+					<a href="/{typename}/{typeid}">
+						<div class="card-panel row center light-blue valign-wrapper">
+							<p class="white-text col s8 flow-text">{name}</p>
+							<div class="card-panel col s4 red white-text flow-text valign">{matchPercent}%</div>
+						</div>
+					</a>
+				</div>
+				<div class="input-field col s0 m2 white-text"></div>
 			</div>
-			<div class="col s2">
-				<button class="btn-large waves-effect waves-light" type="submit" name="action">Search<i class="mdi-content-send right"></i></button>
-			</div>
-			<div class="input-field col s2 white-text">a</div>
-      </div>
-
+		<br>
+		{/users}
     </div>
-    <br><br><br><br><br><br>
-
+	<br>
     <div class="section">
-
     </div>
 </div>

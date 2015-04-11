@@ -5,8 +5,15 @@
       <div class="row center">
         <h5 class="header col s12 light">Matchmaking for volunteers and organizations. Find your perfect fit.</h5>
       </div>
-      <div class="row center">
-        <a href="register/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Get Started</a>
+      <div class="row center" style="{register}">
+        <a href="/register/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Get Started</a>
+      </div>
+	  <div class="row center" style="{logged_in}">
+        <a href="/{type}/{typeid}" id="download-button" class="btn-large waves-effect waves-light amber darken-2">View Your Profile</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/{type}/{typeid}/edit" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Edit Your Profile</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/search/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Find A Match</a>
       </div>
       <br><br>
 

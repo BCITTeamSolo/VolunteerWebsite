@@ -29,7 +29,7 @@ class Application extends CI_Controller {
      * Render this page
      */
     function render() {
-        $this->data['menubar'] = $this->parser->parse('_menubar', $this->config->item('menu_choices'),true);
+        $this->data['menubar'] = $this->parser->parse('_menubar', $this->makemenu(), true);
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 		$this->data['footer'] = $this->parser->parse('_footer', $this->config->item('menu_choices'), true);
 
@@ -37,6 +37,34 @@ class Application extends CI_Controller {
         $this->data['data'] = &$this->data;
         $this->parser->parse('_template', $this->data);
     }
+	
+	function makemenu()
+	{
+		$logged_in = $this->session->userdata('logged_in');
+		
+		$menuitems = array(
+			'menudata' => array(
+				array('name' => 'Search', 'link' => '/search')
+			)
+		);
+			
+		if(!$logged_in)
+		{
+			$menuitems['menudata'][] = array('name' => 'Register', 'link' => '/register');
+			$menuitems['menudata'][] = array('name' => 'Log In', 'link' => '/login');
+		}
+		else
+		{
+			$name 		= $this->session->userdata("user_name");
+			$typename 	= $this->session->userdata("user_typename");
+			$typeid		= $this->session->userdata("user_typeid");
+			
+			$menuitems['menudata'][] = array('name' => "My Profile - $name", 'link' => "/$typename/$typeid");
+			$menuitems['menudata'][] = array('name' => 'Log Out', 'link' => '/logout');
+		}
+		
+		return $menuitems;
+	}
 
 }
 

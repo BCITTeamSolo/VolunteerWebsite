@@ -43,15 +43,16 @@ $route['404_override'] = '';
 
 // my own routes!
 
-$route['user/(:num)'] = "userprofile/showprofile/$1";
-$route['organization/(:num)'] = "organizationprofile/showprofile/$1";
-$route['about'] = "about";
-$route['search'] = "search";
-$route['register'] = "register";
-$route['login'] = "login";
-$route['logout'] = "login/logout";
+$route['user/(:num)'] 			= "userprofile/showprofile/$1";
+$route['user/(:num)/edit'] 		= "userprofile/editprofile/$1";
+$route['organization/(:num)'] 	= "organizationprofile/showprofile/$1";
+$route['about'] 				= "about";
+$route['search'] 				= "search";
+$route['register'] 				= "register";
+$route['login'] 				= "login";
+$route['logout']				= "login/logout";
 $route['register/organization'] = "register/registerOrganization";
-$route['register/myself'] = "register/registerIndividual";
+$route['register/myself'] 		= "register/registerIndividual";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

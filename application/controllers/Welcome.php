@@ -20,6 +20,17 @@ class Welcome extends Application {
 
 	// This function displays the homepage!
     function index() {
+		$this->data['logged_in'] = "display: none;";
+		$this->data['register'] = "";
+		
+		if($this->session->userdata("logged_in"))
+		{
+			$this->data['logged_in'] = "";
+			$this->data['register'] = "display: none;";
+			$this->data['type'] = $this->session->userdata('user_typename');
+			$this->data['typeid'] = $this->session->userdata('user_typeid');
+		}
+		
         $this->data['pagebody'] = 'homepage';    // this is the view we want shown
         // build the list of authors, to pass on to our view
         $this->render();
