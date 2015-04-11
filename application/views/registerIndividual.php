@@ -4,7 +4,10 @@
       <h2 class="header center amber-text text-darken-2">Register Myself</h2>
       <div class="row center">
 		<div class="input-field col s0 m2 white-text"></div>
-		<form method="post" enctype="multipart/form-data" class="col s12 m8">	
+		<form method="post" enctype="multipart/form-data" class="col s12 m8">
+			<div class="row">
+				<h6 class="red-text col s12">All fields are required. You must select at least one cause.</h6>
+			</div>
 			<div class="row">
 				<h4 class="col s12">Basic Info</h4>
 			</div>
@@ -15,7 +18,7 @@
 					<label for="first_name">First Name</label>
 				</div>
 				<div class="input-field col s12 m4">
-					<input id="last_name" name="last_name" type="text" class="validate">
+					<input id="last_name" name="last_name" type="text" class="validate" required>
 					<label for="last_name">Last Name</label>
 				</div>
 				<div class="input-field col s0 m2 white-text"></div>
@@ -35,23 +38,6 @@
 			<div class="row">
 				<h4 class="col s12">About Me</h4>
 			</div>
-			<!--
-			<div class="row">
-				<div class="input-field col s0 m2 white-text"></div>
-				<div class="col s12 m8">
-					<div class="file-field input-field">
-						<div class="btn col s12 m4">
-							<span>Profile Picture</span>
-							<input type="file" id="profile_picture" name="profile_picture" />
-						</div>
-						<div class="col s12 m10 right">
-							<input class="file-path validate valid m6" type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="input-field col s0 m2 white-text"></div>
-			</div>
-			-->
 			<div class="row">
 				<div class="input-field col s0 m2 white-text"></div>
 				<h6 class="col s12 m8 left">My Story</h6>

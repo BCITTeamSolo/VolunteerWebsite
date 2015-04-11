@@ -57,6 +57,9 @@ class Login extends Application {
 		{
 			$this->session->set_userdata("logged_in", true);
 			$this->session->set_userdata("user_email", $email);
+			
+			$this->data['type'] = $this->session->userdata('user_typename');
+			$this->data['typeid'] = $this->session->userdata('user_typeid');
 			$this->data['pagebody'] = 'loginSuccess';    // this is the view we want shown
 		}
 		else
