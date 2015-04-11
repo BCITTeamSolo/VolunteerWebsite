@@ -10,7 +10,7 @@
  *
  * ------------------------------------------------------------------------
  */
-class OrganizationProfile extends Application {
+class Organizationprofile extends Application {
 
     function __construct() {
         parent::__construct();

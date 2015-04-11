@@ -1,0 +1,27 @@
+- filenames should be ex: Usercause, NOT UserCause
+- check font
+- indicate required fields on registration form
+- capitalized vs. lowercase on linux/unix - IMPORTANT
+- do not use 'null' when trying to use the name of the current model as the db table name
+	- just write it down straight up
+	- model names must be the same as db names in case, etc
+
+- search
+- ui for users/organizations
+- profile picture upload
+- use CI password hash vs. md5
+- more comments and clarity
+
+- implement profile image upload
+- implement rich text edit
+- implement menu bar change on logged in
+- implement admin panel for profile info
+- implement admin panel for site administration
+- implement search
+- implement home page with directives & info
+
+- implement "best match" features
+- implement groups
+- implement messaging (send to email)
+- implement code-accessible login
+	- school code & auth code

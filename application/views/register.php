@@ -12,15 +12,18 @@
       </div>
       <br><br>
 		<div class="row center">
+			<!--
 			<div class="input-field col s0 m2 white-text"></div>
 			<div class="col s12 m3">
-				<a href="register/organization/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Register an Organization!</a>
+				<a href="organization/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Register an Organization!</a>
 			</div>
+			-->
 			<div class="input-field col s0 m2 white-text"></div>
-			<div class="col s12 m3">
-				<a href="register/myself/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Register Myself!</a>
+			<div class="col s12 m8">
+				<a href="myself/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Register Myself!</a>
 			</div>
 			<div class="input-field col s0 m2 white-text"></div>
 		</div>
+		<br><br><br><br>
     </div>
 </div>

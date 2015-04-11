@@ -10,7 +10,7 @@ class User extends MY_Model {
     // Constructor
     public function __construct() 
 	{
-        parent::__construct(null, 'userid');
+        parent::__construct('user', 'userid');
     }
 
     // retrieve a single user

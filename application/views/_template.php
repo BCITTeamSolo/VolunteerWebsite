@@ -16,9 +16,15 @@ if (!defined('APPPATH'))
         <title>{title}</title>
         <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		
 		<!-- import materialize.css-->
         <link href="/assets/materialize/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link rel="stylesheet" type="text/css" href="/assets/materialize/css/style.css"/>
+		
+		<!-- scripts -->
+		<script src="/assets/ckeditor/ckeditor.js"></script>
+        <script src="/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="/assets/materialize/js/materialize.min.js"></script>
     </head>
     <body>
 		<div class="navbar-fixed">
@@ -26,15 +32,14 @@ if (!defined('APPPATH'))
 				{menubar}
 			</nav>
 		</div>
-		
 		{content}
-		
 		<footer class="page-footer light-green darken-4">
 			{footer}
 		</footer>
-
-		<!-- scripts -->
-        <script src="/assets/js/jquery-1.11.1.min.js"></script>
-        <script src="/assets/materialize/js/materialize.min.js"></script>
+		<script>
+			$( document ).ready(function(){
+				 $(".button-collapse").sideNav();
+			});
+		</script>
     </body>
 </html>

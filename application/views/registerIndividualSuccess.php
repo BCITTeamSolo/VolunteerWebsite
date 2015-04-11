@@ -1,20 +1,12 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h2 class="header center amber-text text-darken-2">Thanks for joining us!</h2>
+      <h2 class="header center amber-text text-darken-2">Thanks for joining us! Please log in.</h2>
       <div class="row center">
 		<div class="input-field col s0 m2 white-text"></div>
-		<form class="col s12 m8">	
-			<div class="row">
-				<div class="input-field col s0 m2 white-text"></div>
-				<div class="input-field col s12 m4">
-					<p>Welcome to Volunteer Website! Take a look around and find your perfect match!</p>
-					<br>
-					<p>Why not try <a href="/search">searching</a> our existing users and organizations!</p>
-				</div>
-				<div class="input-field col s0 m2 white-text"></div>
+			<div class="col s12 m8">
+				<a href="/login/" id="download-button" class="btn-large waves-effect waves-light amber darken-2">Log In</a>
 			</div>
-		</form>
 		<div class="input-field col s0 m2 white-text"></div>
       </div>
       <br><br>

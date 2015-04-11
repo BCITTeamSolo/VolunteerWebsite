@@ -11,7 +11,7 @@ class Individual extends MY_Model {
 
     // Constructor
     public function __construct() {
-        parent::__construct(null, 'indid');
+        parent::__construct('individual', 'indid');
     }
 
     // retrieve a single organization

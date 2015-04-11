@@ -10,7 +10,7 @@
  *
  * ------------------------------------------------------------------------
  */
-class UserProfile extends Application {
+class Userprofile extends Application {
 
     function __construct() {
         parent::__construct();
@@ -29,6 +29,8 @@ class UserProfile extends Application {
 	function showProfile( $indId )
 	{
 		$this->data['pagebody'] = 'userProfile'; // show the userProfile page
+		$this->data['match_display'] = "";
+		$this->data['edit_display'] = "display: none;";
         
 		// find user with supplied user number
 		$userId	= $this->user->getUserId( $indId );
@@ -55,6 +57,14 @@ class UserProfile extends Application {
 			{
 				// if the viewer is logged in...
 				$this->data["loginMessage"] = "";
+				
+				if( $indId == $this->session->userdata("user_typeid") )
+				{
+					$this->data['match_display'] = "display: none;";
+					$this->data['edit_display'] = "";
+					$this->data['type'] = $this->session->userdata("user_typename");
+					$this->data['id'] = $this->session->userdata("user_typeid");
+				}
 				
 				// calculate match percentage...
 				$userid = $this->session->userdata("user_id");
@@ -130,6 +140,14 @@ class UserProfile extends Application {
 		}
 
         $this->render();
+	}
+	
+	function editProfile( $indId )
+	{
+		$this->data['pagebody'] = 'userProfileEdit'; // show the userProfile page
+        
+		// find user with supplied user number
+		$userId	= $this->user->getUserId( $indId );
 	}
 }
 
