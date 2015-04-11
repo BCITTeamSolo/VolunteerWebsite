@@ -144,10 +144,136 @@ class Userprofile extends Application {
 	
 	function editProfile( $indId )
 	{
-		$this->data['pagebody'] = 'userProfileEdit'; // show the userProfile page
-        
-		// find user with supplied user number
+		// load the page populated by user data
+		$this->load->helper('form');
+		
+		$user 	= $this->user->getSingle( $indId );
 		$userId	= $this->user->getUserId( $indId );
+		$causes = $this->usercause->getAllForUser( $userId );
+		
+		if(isset($_REQUEST["first_name"]))
+		{
+			// user has edited the profile - make necessary changes
+			// validate the submitted data!
+			$errors = array();
+			$valid = true;
+			
+			if($valid)
+			{
+				$individualUpdates = Array();
+				$fnameChanged = false;
+				
+				// set new values if they exist
+				if( $user['firstName'] != $this->input->post('first_name'))
+				{
+					$fnameChanged = true;
+					$individualUpdates['first_name'] = $this->input->post('first_name');
+				}
+				
+				if( $user['lastName'] != $this->input->post('last_name'))
+				{
+					$individualUpdates['last_name'] = $this->input->post('last_name');
+				}
+				
+				if( $user['about'] != $this->input->post('about_me'))
+				{
+					$individualUpdates['about_me'] = $this->input->post('about_me');
+				}
+				
+				// update individual database
+				/*
+				$this->db->where('indid', $indId);
+				$this->db->set($individualUpdates);
+				$this->db->insert('individual');
+				*/
+				
+				$this->db->update('individual', $individualUpdates, "indid = $indId");
+					
+				/*
+					
+				// check causes for this user
+				if( $this->input->post('cause_animals') )
+				{
+					$query = $this->db->get_where();
+					$this->addCause( $user_id, 1 );
+				}
+				
+				if( $this->input->post('cause_environment') )
+				{
+					$this->addCause( $user_id, 2 );
+				}
+				
+				if( $this->input->post('cause_welfare') )
+				{
+					$this->addCause( $user_id, 3 );
+				}
+				
+				if( $this->input->post('cause_disabilities') )
+				{
+					$this->addCause( $user_id, 4 );
+				}
+				*/
+				
+				// check if session user name data must be refreshed
+				if($fnameChanged)
+				{
+					$this->session->unset_userdata("user_name");
+					$this->session->set_userdata('user_name', $this->input->post('first_name'));
+				}
+				
+				// return to profile
+				redirect("/user/$indId");
+			}
+			else
+			{
+				var_dump($errors);
+				exit();
+				
+				$this->data['errors'] = $errors;
+				$this->data['pagebody'] = 'registerIndividual';
+				$this->render();
+			}
+		}
+		else
+		{
+			
+			$this->data['pagebody'] = 'userProfileEdit'; // show the userProfile page
+			
+			// set text editable data
+			$this->data['first_name'] = set_value('first_name', $user['firstName']);
+			$this->data['last_name'] = set_value('last_name', $user['lastName']);
+			$this->data['about_me'] = set_value('last_name', $user['about']);
+			
+			// set checkbox data
+			$this->data['animals'] = "";
+			$this->data['disabilities'] = "";
+			$this->data['environment'] = "";
+			$this->data['welfare'] = "";
+			
+			// set checked if the user has selected it
+			foreach( $causes as $cause )
+			{
+				
+				if($cause['cause'] == 'animals')
+				{
+					$this->data['animals'] = "checked";
+				}
+				else if($cause['cause'] == 'disabilities')
+				{
+					$this->data['disabilities'] = "checked";
+				}
+				else if($cause['cause'] == 'environment')
+				{
+					$this->data['environment'] = "checked";
+				}
+				else if($cause['cause'] == 'welfare')
+				{
+					$this->data['welfare'] = "checked";
+				}
+			}
+			
+			$this->render();
+		}
 	}
 }
 
