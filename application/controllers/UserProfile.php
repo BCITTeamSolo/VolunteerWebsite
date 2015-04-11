@@ -181,38 +181,107 @@ class Userprofile extends Application {
 				}
 				
 				// update individual database
-				/*
-				$this->db->where('indid', $indId);
-				$this->db->set($individualUpdates);
-				$this->db->insert('individual');
-				*/
-				
 				$this->db->update('individual', $individualUpdates, "indid = $indId");
 					
-				/*
-					
 				// check causes for this user
+				
+				$cause_animals = false;
+				$cause_environment = false;
+				$cause_welfare = false;
+				$cause_disabilities = false;
+				
 				if( $this->input->post('cause_animals') )
 				{
-					$query = $this->db->get_where();
-					$this->addCause( $user_id, 1 );
+					$cause_animals = true;
 				}
 				
 				if( $this->input->post('cause_environment') )
 				{
-					$this->addCause( $user_id, 2 );
+					$cause_environment = true;
 				}
 				
 				if( $this->input->post('cause_welfare') )
 				{
-					$this->addCause( $user_id, 3 );
+					$cause_welfare = true;
 				}
 				
 				if( $this->input->post('cause_disabilities') )
 				{
-					$this->addCause( $user_id, 4 );
+					$cause_disabilities = true;
 				}
-				*/
+				
+				// cycle through existing causes and compare with selected ones
+				
+				$cause_animals_current = false;
+				$cause_environment_current = false;
+				$cause_welfare_current = false;
+				$cause_disabilities_current = false;
+				
+				foreach( $causes as $cause )
+				{
+					if($cause['cause'] == 'animals')
+					{
+						$cause_animals_current = true;
+					}
+					else if($cause['cause'] == 'disabilities')
+					{
+						$cause_disabilities_current = true;
+					}
+					else if($cause['cause'] == 'environment')
+					{
+						$cause_environment_current = true;
+					}
+					else if($cause['cause'] == 'welfare')
+					{
+						$cause_welfare_current = true;
+					}
+				}
+				
+				// if we need to add or remove a cause entry, do it!
+				if($cause_animals_current != $cause_animals)
+				{
+					if($cause_animals_current == false)
+					{
+						$this->addCause( $userId, 1 );
+					}
+					else
+					{
+						$this->removeCause( $userId, 1);
+					}
+				}
+				if($cause_environment_current != $cause_environment)
+				{
+					if($cause_environment_current == false)
+					{
+						$this->addCause( $userId, 2 );
+					}
+					else
+					{
+						$this->removeCause( $userId, 2);
+					}
+				}
+				if($cause_welfare_current != $cause_welfare)
+				{
+					if($cause_welfare_current == false)
+					{
+						$this->addCause( $userId, 3 );
+					}
+					else
+					{
+						$this->removeCause( $userId, 3);
+					}
+				}
+				if($cause_disabilities_current != $cause_disabilities)
+				{
+					if($cause_disabilities_current == false)
+					{
+						$this->addCause( $userId, 4 );
+					}
+					else
+					{
+						$this->removeCause( $userId, 4);
+					}
+				}
 				
 				// check if session user name data must be refreshed
 				if($fnameChanged)
@@ -274,6 +343,21 @@ class Userprofile extends Application {
 			
 			$this->render();
 		}
+	}
+	
+	// add new cause for registering user
+	function addCause( $user_id, $cause_id )
+	{
+		$userCause 				= $this->usercause->create();
+		$userCause->userid 		= $user_id;
+		$userCause->causeid 	= $cause_id;
+		
+		$this->usercause->add( $userCause );
+	}
+	
+	function removeCause( $user_id, $cause_id )
+	{
+		$this->db->delete('user_cause', array('userid' => $user_id, 'causeid' => $cause_id));
 	}
 }
 
